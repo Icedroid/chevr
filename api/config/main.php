@@ -6,16 +6,15 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'api',
+    'id' => 'Chevr API',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'api\controllers',
     'components' => [
         'user' => [
             'class' => yii\web\User::className(),
-            'identityClass' => common\models\User::className(),
-            'loginUrl' => null,
+            'identityClass' => api\modules\v1\models\User::className(),
             'enableSession' => false,
+            'loginUrl' => null,
         ],
         'log' => [//此项具体详细配置，请访问http://wiki.feehi.com/index.php?title=Yii2_log
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -23,23 +22,6 @@ return [
                 [
                     'class' => yii\log\FileTarget::className(),//当触发levels配置的错误级别时，保存到日志文件
                     'levels' => ['error', 'warning'],
-                ],
-                [
-                    'class' => yii\log\EmailTarget::className(),//当触发levels配置的错误级别时，发送到此些邮箱（请改成自己的邮箱）
-                    'levels' => ['error', 'warning'],
-                    /*'categories' => [//默认匹配所有分类。启用此项后，仅匹配数组中的分类信息会触发邮件提醒（白名单）
-                        'yii\db\*',
-                        'yii\web\HttpException:*',
-                    ],*/
-                    'except' => [//以下配置，除了匹配数组中的分类信息都会触发邮件提醒（黑名单）
-                        'yii\web\HttpException:404',
-                        'yii\web\HttpException:403',
-                        'yii\debug\Module::checkAccess',
-                    ],
-                    'message' => [
-                        'to' => ['admin@feehi.com', 'liufee@126.com'],
-                        'subject' => '来自 Land api的新日志消息',
-                    ],
                 ],
             ],
         ],
@@ -52,12 +34,13 @@ return [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',
-                'login' => 'site/login',
-                'register' => 'site/register',
+                '' => 'v1/default/index',
+                'v1/login' => 'v1/default/login',
+                'v1/config' => 'v1/default/config',
+                'v1/feedback' => 'v1/default/feedback',
                 [
                     'class' => yii\rest\UrlRule::className(),
-                    'controller' => ['user', 'article'],
+                    'controller' => ['v1/car','v1/user', 'v1/article'],
                 ],
             ],
         ],
@@ -70,9 +53,30 @@ return [
         ],
         'response' => [
             'format' => yii\web\Response::FORMAT_JSON,
+            'formatters' => [
+                \yii\web\Response::FORMAT_JSON => [
+                    'class' => yii\web\JsonResponseFormatter::class,
+                    'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+                    'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+                    // ...
+                ],
+            ],
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                if ($response->data !== null) {
+                    $response->data = [
+                        'success' => $response->isSuccessful,
+                        'data' => $response->data,
+                    ];
+                    $response->statusCode = 200;
+                }
+            },
         ],
     ],
     'modules' => [
+        'v1' => [
+            'class' => 'api\modules\v1\Module',
+        ],
     ],
     'params' => $params,
 ];
