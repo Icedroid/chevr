@@ -65,7 +65,7 @@ return [
                 $response = $event->sender;
                 if ($response->data !== null) {
                     $response->data = [
-                        'success' => $response->isSuccessful,
+                        'code' => $response->isSuccessful ? 1 : 0,
                         'data' => $response->data,
                     ];
                     $response->statusCode = 200;
