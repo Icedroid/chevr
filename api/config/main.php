@@ -8,7 +8,14 @@ $params = array_merge(
 return [
     'id' => 'Chevr API',
     'basePath' => dirname(__DIR__),
+//    'language' => 'zh-CN',//默认语言
+    'timeZone' => 'Asia/Shanghai',//默认时区
     'bootstrap' => ['log'],
+    'modules' => [
+        'v1' => [
+            'class' => 'api\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'user' => [
             'class' => yii\web\User::className(),
@@ -29,6 +36,19 @@ return [
             'class' => yii\caching\DummyCache::className(),
             'keyPrefix' => 'api',       // 唯一键前缀
         ],
+        'i18n' => [
+            'translations' => [//多语言包设置
+                'app*' => [
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@backend/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
@@ -40,7 +60,7 @@ return [
                 'v1/feedback' => 'v1/default/feedback',
                 [
                     'class' => yii\rest\UrlRule::className(),
-                    'controller' => ['v1/car','v1/user', 'v1/article'],
+                    'controller' => ['v1/car', 'v1/user', 'v1/article'],
                 ],
             ],
         ],
@@ -64,18 +84,26 @@ return [
             'on beforeSend' => function ($event) {
                 $response = $event->sender;
                 if ($response->data !== null) {
+                    $data = $response->data;
                     $response->data = [
                         'code' => $response->isSuccessful ? 1 : 0,
-                        'data' => $response->data,
+                        'msg' => $response->statusText,
+                        'data' => $data,
                     ];
+                    if (!$response->isSuccessful) {
+                        if (!empty($data) && is_array($data)) {
+                            //422: 数据验证失败 (例如，响应一个 POST 请求)。 请检查响应体内详细的错误消息。
+                            if ($response->statusCode == 422 && isset($data[0]) && isset($data[0]['message'])) {
+                                $response->data['msg'] = $data[0]['message'];
+                            } elseif (isset($data['message'])) {
+                                $response->data['msg'] = $data['message'];
+                            }
+                            $response->data['data'] = [];
+                        }
+                    }
                     $response->statusCode = 200;
                 }
             },
-        ],
-    ],
-    'modules' => [
-        'v1' => [
-            'class' => 'api\modules\v1\Module',
         ],
     ],
     'params' => $params,

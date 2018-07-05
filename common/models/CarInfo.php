@@ -55,8 +55,8 @@ class CarInfo extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'image' => Yii::t('app', 'Image'),
+            'name' => Yii::t('app', 'Car Name'),
+            'image' => Yii::t('app', 'Car Image'),
             'voice_type' => Yii::t('app', 'Voice Type'),
             'sort' => Yii::t('app', 'Sort'),
             'status' => Yii::t('app', 'Status'),

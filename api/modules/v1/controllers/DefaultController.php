@@ -38,12 +38,12 @@ class DefaultController extends Controller
     *     tags={"api"},
     *     summary="用户登录",
     *     description="返回 access_token",
+    *     produces={"application/json"},
     *     @SWG\Parameter(
-    *        in = "formData",
-    *        name = "request body",
-    *        description = "用户信息",
+    *        in = "body",
+    *        name = "body",
+    *        description = "用户信息的整个json作为内容体",
     *        required = true,
-    *        type = "string",
     *        @SWG\Schema(ref="#/definitions/Error"),
     *     ),
     *     @SWG\Response(
@@ -94,6 +94,12 @@ class DefaultController extends Controller
            $config['startup'] = $startup; 
         }
         return $config;
+    }
+
+
+    public function actionExperience()
+    {
+        $carId = Yii::$app->request->post('id');
     }
 
     /**

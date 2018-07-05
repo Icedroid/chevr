@@ -43,7 +43,8 @@ class CarController extends \yii\rest\ActiveController
      *
      *     @SWG\Response(
      *         response = 200,
-     *         description = "success"
+     *         description = "success",
+     *         @SWG\Schema(ref="#/definitions/Car"),
      *     )
      * )
      */
