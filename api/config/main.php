@@ -19,7 +19,7 @@ return [
     'components' => [
         'user' => [
             'class' => yii\web\User::className(),
-            'identityClass' => api\modules\v1\models\User::className(),
+            'identityClass' => api\modules\v1\models\CarAgency::className(),
             'enableSession' => false,
             'loginUrl' => null,
         ],
@@ -58,6 +58,7 @@ return [
                 'v1/login' => 'v1/default/login',
                 'v1/config' => 'v1/default/config',
                 'v1/feedback' => 'v1/default/feedback',
+                'v1/experience' => 'v1/default/experience',
                 [
                     'class' => yii\rest\UrlRule::className(),
                     'controller' => ['v1/car', 'v1/user', 'v1/article'],
@@ -86,7 +87,7 @@ return [
                 if ($response->data !== null) {
                     $data = $response->data;
                     $response->data = [
-                        'code' => $response->isSuccessful ? 1 : 0,
+                        'code' => $response->isSuccessful ? 1 : $response->statusCode,
                         'msg' => $response->statusText,
                         'data' => $data,
                     ];

@@ -29,6 +29,7 @@ class CarExperience extends \yii\db\ActiveRecord
             \yii\behaviors\TimestampBehavior::className(),
         ];
     }
+
     /**
      * {@inheritdoc}
      */

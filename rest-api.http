@@ -1,0 +1,77 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+GET http://chevr.cn/api/v1/cars
+Accept: application/json
+
+###
+
+GET http://chevr.cn/api/v1/config
+Accept: application/json
+
+###
+
+POST http://chevr.cn/api/v1/login?access-token=59a1af448c3cd7f250e0635c39a05a5a
+Content-Type: application/json
+
+{
+  "access_token": "59a1af448c3cd7f250e0635c39a05a5a",
+
+  "accountCode": "d011i1",
+
+  "accountName": "陈楚楚",
+
+  "appName": "掌上4S店",
+
+  "brandCode": 3,
+
+  "dossBrandId": 2,
+
+  "mobile": "18626430112",
+
+  "positionCode": "D_PO_2017",
+
+  "positionId": "sc",
+
+  "positionName": "网电销售顾问1",
+
+  "saleCode": "CH1385",
+
+  "serviceCode": "2200301",
+
+  "storeCode": 471,
+
+  "storeName": "宜兴市汇通汽车销售服务有限公司",
+
+  "storeShortName": "宜兴汇通"
+}
+
+###
+
+POST http://chevr.cn/api/v1/experience?access-token=59a1af448c3cd7f250e0635c39a05a5a
+Content-Type: application/json
+
+{
+  "car_id": 2,
+  "item_1": 1,
+  "item_2": 1,
+  "item_12": 1,
+  "item_13": 1,
+  "item_14": 1,
+  "item_15": 1,
+  "item_16": 1
+}
+
+###
+
+POST http://chevr.cn/api/v1/feedback?access-token=59a1af448c3cd7f250e0635c39a05a5a
+Content-Type: application/x-www-form-urlencoded
+
+content="长内容内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容"&image=["uploads/car/1.png", "uploads/car/2.png"]
+
+###
+
