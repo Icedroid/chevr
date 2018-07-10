@@ -156,4 +156,18 @@ class Constants
         ];
         return self::getItems($items, $key);
     }
+
+
+    const Finish_Status = 1;
+    const UnFinish_Status = 0;
+
+    public static function getFinishStatusItems($key = null)
+    {
+        $items = [
+            self::Finish_Status => yii::t('app', 'Finish'),
+            self::UnFinish_Status => yii::t('app', 'unFinish'),
+        ];
+        return self::getItems($items, $key);
+    }
+
 }

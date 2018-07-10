@@ -45,6 +45,8 @@ class CarInfo extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['voice_type', 'sort', 'status', 'created_at', 'updated_at'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
+            [['voice_type', 'sort', 'status'], 'compare', 'compareValue' => 0, 'operator' => '>='],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif, webp'],
         ];
     }
 
@@ -57,7 +59,7 @@ class CarInfo extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Car Name'),
             'image' => Yii::t('app', 'Car Image'),
-            'voice_type' => Yii::t('app', 'Voice Type'),
+            'voice_type' => Yii::t('app', 'Car Voice Type'),
             'sort' => Yii::t('app', 'Sort'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),

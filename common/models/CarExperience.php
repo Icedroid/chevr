@@ -58,16 +58,32 @@ class CarExperience extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'car_id' => Yii::t('app', 'Car ID'),
             'agency_id' => Yii::t('app', 'Agency ID'),
-            'item_1' => Yii::t('app', 'Item 1'),
-            'item_2' => Yii::t('app', 'Item 2'),
-            'item_11' => Yii::t('app', 'Item 11'),
-            'item_12' => Yii::t('app', 'Item 12'),
-            'item_13' => Yii::t('app', 'Item 13'),
-            'item_14' => Yii::t('app', 'Item 14'),
-            'item_15' => Yii::t('app', 'Item 15'),
-            'item_16' => Yii::t('app', 'Item 16'),
+            'item_1' => Yii::t('app', 'Car Item 1'),
+            'item_2' => Yii::t('app', 'Car Item 2'),
+            'item_11' => Yii::t('app', 'Car Item 11'),
+            'item_12' => Yii::t('app', 'Car Item 12'),
+            'item_13' => Yii::t('app', 'Car Item 13'),
+            'item_14' => Yii::t('app', 'Car Item 14'),
+            'item_15' => Yii::t('app', 'Car Item 15'),
+            'item_16' => Yii::t('app', 'Car Item 16'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarAgency()
+    {
+        return $this->hasOne(CarAgency::className(), ['id' => 'agency_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarInfo()
+    {
+        return $this->hasOne(CarInfo::className(), ['id' => 'car_id']);
     }
 }

@@ -30,6 +30,7 @@
     "scrawlMaxSize": 2048000, /* 上传大小限制，单位B */
     "scrawlUrlPrefix": "", /* 图片访问路径前缀 */
     "scrawlInsertAlign": "none",
+    "scrawlAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"],
 
     /* 截图工具上传 */
     "snapscreenActionName": "uploadimage", /* 执行上传截图的action名称 */
@@ -90,5 +91,4 @@
         ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
         ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
     ] /* 列出的文件类型 */
-
 }

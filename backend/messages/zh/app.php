@@ -347,4 +347,44 @@ return [
     'Ad' => '广告',
     'Ad Explain' => '广告描述',
     /*ad*/
+
+    /*Car*/
+    'Car Info' => '车型信息',
+    'Car Name' => '车型名称',
+    'Car Image' => '车型图片',
+    'Car Voice Type'=>'是否是BOSS音箱',
+    /*Car*/
+
+    /*Car Agency*/
+    'Car Agency' => '经销商',
+    'Account Code' => '账号编码',
+    'Account Name' => '账号名称',
+    'Mobile' => '手机号码',
+    'Position Name' => '职位名称',
+    'Store Name' => '店面名称',
+    'Login Count' =>'登录次数',
+    'Last Login Time' =>'最后登录时间',
+    /*Car Agency*/
+
+    /*Car Feedback*/
+    'Car Feedback' => '用户反馈',
+    'Agency ID' => '用户ID',
+    'Agency Name' => '用户名称',
+    /*Car Feedback*/
+
+    /*Car Experience*/
+    'Car ID' => '车型ID',
+    'Car Experiences' => '体验记录',
+    'Car Item 1' => '静态',
+    'Car Item 2' => '动态',
+    'Car Item 11' => '普通音箱',
+    'Car Item 12' => '音箱真实音',
+    'Car Item 13' => '音箱环绕音',
+    'Car Item 14' => '音箱高低音',
+    'Car Item 15' => '空调',
+    'Car Item 16' => '噪音',
+    'Finish' => '已完成',
+    'unFinish' => '未完成',
+
+    /*Car Experience*/
 ];

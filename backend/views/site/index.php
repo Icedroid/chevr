@@ -53,8 +53,8 @@ $this->title = yii::t('app', 'Backend Manage System');
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="J_menuItem" href="<?= Url::to(['admin-user/update-self']) ?>"><?= yii::t('app', 'Profile') ?></a></li>
-                            <li><a class="J_menuItem" href="<?= Url::to(['article/index']) ?>"><?= yii::t('app', 'Articles') ?></a></li>
-                            <li><a target="_blank" href="<?= yii::$app->params['site']['url'] ?>"><?= yii::t('app', 'Frontend') ?></a></li>
+                           <!-- <li><a class="J_menuItem" href="<?/*= Url::to(['article/index']) */?>"><?/*= yii::t('app', 'Articles') */?></a></li>
+                            <li><a target="_blank" href="<?/*= yii::$app->params['site']['url'] */?>"><?/*= yii::t('app', 'Frontend') */?></a></li>-->
                             <li class="divider"></li>
                             <li><a data-method="post" href="<?= Url::toRoute('site/logout') ?>"><?= yii::t('app', 'Logout') ?></a></li>
                         </ul>
@@ -94,15 +94,15 @@ $this->title = yii::t('app', 'Backend Manage System');
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="hidden-xs">
-                        <a href="<?= yii::$app->params['site']['url'] ?>" target='_blank'><i class="fa fa-internet-explorer"></i> <?= yii::t('app', 'Frontend') ?></a>
-                    </li>
+<!--                    <li class="hidden-xs">
+                        <a href="<?/*= yii::$app->params['site']['url'] */?>" target='_blank'><i class="fa fa-internet-explorer"></i> <?/*= yii::t('app', 'Frontend') */?></a>
+                    </li>-->
                     <li class="hidden-xs">
                         <a href="javascript:void(0)" onclick="reloadIframe()"><i class="fa fa-refresh"></i> <?= yii::t('app', 'Refresh') ?></a>
                     </li>
-                    <li class="hidden-xs">
-                        <a href="http://cms.feehi.com/help" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> <?= yii::t('app', 'Support') ?></a>
-                    </li>
+<!--                    <li class="hidden-xs">
+                        <a href="http://cms.feehi.com/help" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> <?/*= yii::t('app', 'Support') */?></a>
+                    </li>-->
                     <li class="dropdown hidden-xs">
                         <a class="right-sidebar-toggle" aria-expanded="false"><i class="fa fa-tasks"></i> <?= yii::t('app', 'Theme') ?></a>
                     </li>

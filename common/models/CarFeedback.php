@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "{{%car_feedback}}".
@@ -66,5 +67,29 @@ class CarFeedback extends \yii\db\ActiveRecord
             'image' => Yii::t('app', 'Image'),
             'created_at' => Yii::t('app', 'Created At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarAgency()
+    {
+        return $this->hasOne(\backend\models\CarAgency::className(), ['id' => 'agency_id']);
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        if ($this->image) {
+            /** @var TargetAbstract $cdn */
+            $cdn = yii::$app->get('cdn');
+
+            $arr = explode(self::MULTI_IMAGE_SEPARATOR, $this->image);
+            foreach($arr as $i=>$img){
+                $arr[$i] =  $cdn->getCdnUrl($img);
+            }
+//            $this->image = $arr;
+            $this->image = implode(self::MULTI_IMAGE_SEPARATOR, $arr);
+        }
     }
 }
