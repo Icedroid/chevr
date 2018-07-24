@@ -9,6 +9,11 @@ use yii\web\UploadedFile;
 
 class CarFeedback extends \common\models\CarFeedback
 {
+    public function formName()
+    {
+        return '';
+    }
+
     public function beforeValidate()
     {
         if (!Yii::$app->getUser()->getIsGuest()) {
