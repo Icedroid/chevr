@@ -23,6 +23,7 @@ class CarFeedback extends \common\models\CarFeedback
         }
         $uploadArray = UploadedFile::getInstances($this, 'image');
         if (!empty($uploadArray)) {
+            $arr = [];
             $uploadPath = yii::getAlias('@feedback');
             if (strpos(strrev($uploadPath), '/') !== 0) $uploadPath .= '/';
             if (!FileHelper::createDirectory($uploadPath)) {
@@ -38,8 +39,9 @@ class CarFeedback extends \common\models\CarFeedback
                 }
                 $fileRelativeUrl = str_replace(yii::getAlias('@frontend/web'), '', $fullName);
 
-                $this->image[] = $fileRelativeUrl;
+                $arr[] = $fileRelativeUrl;
             }
+            $this->image = implode(";", $arr);
         }
 
 
@@ -56,7 +58,7 @@ class CarFeedback extends \common\models\CarFeedback
 
     public function beforeSave($insert)
     {
-        $this->setAttribute('image', implode(self::MULTI_IMAGE_SEPARATOR, Json::decode($this->image)));
+//        $this->setAttribute('image', implode(self::MULTI_IMAGE_SEPARATOR, Json::decode($this->image)));
         return parent::beforeSave($insert);
     }
 }
