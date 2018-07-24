@@ -47,7 +47,7 @@ class CarFeedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['agency_id', 'agency_name', 'content', 'image'], 'required'],
+            [['agency_id', 'agency_name', 'content'], 'required'],
             [['agency_id', 'created_at'], 'integer'],
             [['content', 'image'], 'string'],
             [['agency_name'], 'string', 'max' => 255],

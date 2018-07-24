@@ -214,13 +214,6 @@ class DefaultController extends Controller
      *        required = true,
      *        type = "string"
      *     ),
-     *     @SWG\Parameter(
-     *        in = "formData",
-     *        name = "image",
-     *        description = "图片url数组",
-     *        required = true,
-     *        type = "string"
-     *     ),
      *     @SWG\Response(
      *         response = 200,
      *         description = "success"
