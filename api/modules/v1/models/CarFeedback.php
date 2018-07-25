@@ -41,7 +41,7 @@ class CarFeedback extends \common\models\CarFeedback
 
                 $arr[] = $fileRelativeUrl;
             }
-            $this->image = implode(";", $arr);
+            $this->image = implode(self::MULTI_IMAGE_SEPARATOR, $arr);
         }
 
 

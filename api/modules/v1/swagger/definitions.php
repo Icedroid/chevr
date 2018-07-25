@@ -53,7 +53,7 @@ namespace app\models\v1\swagger;
 /**
  * @SWG\Definition(
  *      definition="Experience",
- *      required={"car_id", "agency_id"},
+ *      required={"car_id"},
  * 	    @SWG\Property(property="car_id", type="integer", example=1, description="车型ID"),
  * 		@SWG\Property(property="item_1", type="integer", description="静态体验是否完成,0-N 1-Y"),
  * 		@SWG\Property(property="item_2", type="integer", description="动态体验是否完成,0-N 1-Y"),
