@@ -7,7 +7,7 @@ class CarInfo extends \common\models\CarInfo
     public function fields()
     {
         $fields = parent::fields();
-        unset($fields['status'], $fields['created_at'], $fields['updated_at']);
+        unset($fields['h5image'], $fields['status'], $fields['created_at'], $fields['updated_at']);
 //        $fields['image'] = function ($model) {
 //            if( empty($this->image) ) return '';
 //            if ( strpos($this->image, 'http') === 0 || strpos($this->image, 'https') === 0){
@@ -33,6 +33,10 @@ class CarInfo extends \common\models\CarInfo
         if( strpos($this->image, '/') === 0 ){
             $this->image = substr($this->image, 1);
         }
-        $this->image = Yii::$app->request->hostInfo.DIRECTORY_SEPARATOR.$this->image;
+        $hostUrl = Yii::$app->getRequest()->getHostInfo();
+        if(isset(Yii::$app->params['staticCdn']) && !empty(Yii::$app->params['staticCdn'])){
+            $hostUrl = Yii::$app->params['staticCdn'];
+        }
+        $this->image = rtrim($hostUrl, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->image;
     }
 }

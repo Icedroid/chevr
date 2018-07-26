@@ -133,7 +133,11 @@ class DefaultController extends Controller
         $startup = [];
         if (isset($config['startup'])) {
             foreach ($config['startup'] as $img) {
-                $startup[] = Yii::$app->request->hostInfo . DIRECTORY_SEPARATOR . ltrim($img, DIRECTORY_SEPARATOR);
+                $hostUrl = Yii::$app->getRequest()->getHostInfo();
+                if(isset(Yii::$app->params['staticCdn']) && !empty(Yii::$app->params['staticCdn'])){
+                    $hostUrl = Yii::$app->params['staticCdn'];
+                }
+                $startup[] = rtrim($hostUrl, DIRECTORY_SEPARATOR). DIRECTORY_SEPARATOR . ltrim($img, DIRECTORY_SEPARATOR);
             }
             $config['startup'] = $startup;
         }

@@ -24,6 +24,9 @@ use backend\widgets\ActiveForm;
                         <?= $form->field($model, 'image')->imgInput(['style' => 'max-width:200px;max-height:200px']);  ?>
                         <div class="hr-line-dashed"></div>
 
+                        <?= $form->field($model, 'h5image')->imgInput(['style' => 'max-width:200px;max-height:200px']);  ?>
+                        <div class="hr-line-dashed"></div>
+
                         <?= $form->field($model, 'voice_type')->checkbox() ?>
                         <div class="hr-line-dashed"></div>
 

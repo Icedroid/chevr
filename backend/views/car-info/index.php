@@ -45,6 +45,22 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Info');
                             },
                         ],
                         [
+                            'attribute' => 'h5image',
+                            'format' => 'raw',
+                            'value' => function ($model, $key, $index, $column) {
+                                if ($model->h5image == '') {
+                                    $num = Constants::YesNo_No;
+                                } else {
+                                    $num = Constants::YesNo_Yes;
+                                }
+                                return Html::a(Constants::getYesNoItems($num), $model->h5image ? $model->h5image : 'javascript:void(0)', [
+                                    'img' => $model->h5image ? $model->h5image : '',
+                                    'class' => 'thumbImg',
+                                    'target' => '_blank',
+                                ]);
+                            },
+                        ],
+                        [
                             'class' =>StatusColumn::className(),
                             'attribute' => 'voice_type',
                             'filter' => Constants::getYesNoItems(),
@@ -76,6 +92,22 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Info');
 </div>
 <?php JsBlock::begin()?>
     <script>
+        function showImg() {
+            t = setTimeout(function () {
+            }, 200);
+            var url = $(this).attr('img');
+            if (url.length == 0) {
+                layer.tips('<?=yii::t('app', 'No picture')?>', $(this));
+            } else {
+                layer.tips('<img style="max-width: 500px;max-height: 300px" src=' + url + '>', $(this));
+            }
+        }
+        $(document).ready(function(){
+            var t;
+            $('table tr td a.thumbImg').hover(showImg,function(){
+                clearTimeout(t);
+            });
+        });
         var container = $('#pjax');
         container.on('pjax:send',function(args){
             layer.load(2);

@@ -55,6 +55,7 @@ class ArticleController extends Controller
      */
     public function actionIndex($cat = '')
     {
+        $this->redirect('/admin');
         if ($cat == '') {
             $cat = yii::$app->getRequest()->getPathInfo();
         }

@@ -352,6 +352,7 @@ return [
     'Car Info' => '车型信息',
     'Car Name' => '车型名称',
     'Car Image' => '车型图片',
+    'Car H5 Image' => '车型H5图片',
     'Car Voice Type'=>'是否是BOSS音箱',
     /*Car*/
 

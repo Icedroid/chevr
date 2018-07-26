@@ -13,6 +13,7 @@ class CarInfo extends \common\models\CarInfo
     public function beforeSave($insert)
     {
         Util::handleModelSingleFileUpload($this, 'image', $insert, '@car');
+        Util::handleModelSingleFileUpload($this, 'h5image', $insert, '@car');
 
         return parent::beforeSave($insert);
     }
