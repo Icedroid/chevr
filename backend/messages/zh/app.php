@@ -358,10 +358,10 @@ return [
 
     /*Car Agency*/
     'Car Agency' => '经销商',
-    'Account Code' => '账号编码',
-    'Account Name' => '账号名称',
+    'Account Code' => '经销商账号',
+    'Account Name' => '经销商',
     'Mobile' => '手机号码',
-    'Position Name' => '职位名称',
+    'Position Name' => '经销商身份',
     'Store Name' => '店面名称',
     'Login Count' =>'登录次数',
     'Last Login Time' =>'最后登录时间',
@@ -375,9 +375,9 @@ return [
 
     /*Car Experience*/
     'Car ID' => '车型ID',
-    'Car Experiences' => '体验记录',
+    'Car Experiences' => '经销商使用情况统计',
     'Car Item 1' => '静态',
-    'Car Item 2' => '动态',
+    'Car Item 2' => '动态-底盘&悬架',
     'Car Item 11' => '普通音箱',
     'Car Item 12' => '音箱真实音',
     'Car Item 13' => '音箱环绕音',
@@ -386,6 +386,23 @@ return [
     'Car Item 16' => '噪音',
     'Finish' => '已完成',
     'unFinish' => '未完成',
+    'Experience Created At' => '试驾时间',
+    'Experience Percentage' => '体验完成度',
 
     /*Car Experience*/
+
+    'Car Experiences2' =>'车型试驾情况统计',
+    'Car Experiences3' =>'App使用情况统计',
+    /*Car store*/
+    'Area' => '大区',
+    'Province' => '省',
+    'City' => '市',
+    /*Car store*/
+
+    'count' =>'试驾次数',
+    'Use Percentage'=>'使用率',
+    'Search' => '搜索',
+
+
+
 ];

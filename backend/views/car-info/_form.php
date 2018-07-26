@@ -21,10 +21,10 @@ use backend\widgets\ActiveForm;
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                         <div class="hr-line-dashed"></div>
 
-                        <?= $form->field($model, 'image')->imgInput(['style' => 'max-width:200px;max-height:200px']);  ?>
+                        <?= $form->field($model, 'image')->imgInput(['style' => 'max-width:200px;max-height:200px'])->hint('请上传510*360的图片',['class'=>'col-sm-2 control-label text-info']);  ?>
                         <div class="hr-line-dashed"></div>
 
-                        <?= $form->field($model, 'h5image')->imgInput(['style' => 'max-width:200px;max-height:200px']);  ?>
+                        <?= $form->field($model, 'h5image')->imgInput(['style' => 'max-width:200px;max-height:200px'])->hint('请上传640*510的图片',['class'=>"col-sm-2 control-label text-info"]); ?>
                         <div class="hr-line-dashed"></div>
 
                         <?= $form->field($model, 'voice_type')->checkbox() ?>

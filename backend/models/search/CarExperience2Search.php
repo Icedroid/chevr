@@ -12,10 +12,9 @@ use backend\components\search\SearchEvent;
 /**
  * CarExperienceSearch represents the model behind the search form about `backend\models\CarExperience`.
  */
-class CarExperienceSearch extends CarExperience
+class CarExperience2Search extends CarExperience
 {
     public $car_name;
-    public $account_name;
 
     /**
      * @inheritdoc
@@ -23,10 +22,10 @@ class CarExperienceSearch extends CarExperience
     public function rules()
     {
         return [
-            [['id', 'car_id', 'agency_id', 'item_1', 'item_2', 'item_11', 'item_12', 'item_13', 'item_14', 'item_15',
-                'item_16'], 'integer'],
-            [['created_at', 'updated_at'], 'string'],
-            [['car_name', 'account_name'], 'string'],
+//            [['id', 'car_id', 'agency_id', 'item_1', 'item_2', 'item_11', 'item_12', 'item_13', 'item_14', 'item_15',
+//                'item_16'], 'integer'],
+//            [['created_at', 'updated_at'], 'string'],
+            [['car_name'], 'string'],
         ];
     }
 
@@ -41,12 +40,13 @@ class CarExperienceSearch extends CarExperience
 
     public function behaviors()
     {
-        return [
-            [
-                'class' => TimeSearchBehavior::className(),
-                'timeAttributes' => ['{{car_experience}}.created_at'=>'created_at'],
-            ],
-        ];
+        return [];
+//        return [
+//            [
+//                'class' => TimeSearchBehavior::className(),
+//                'timeAttributes' => ['{{car_experience}}.created_at'=>'created_at'],
+//            ],
+//        ];
     }
 
     /**
@@ -58,8 +58,17 @@ class CarExperienceSearch extends CarExperience
      */
     public function search($params)
     {
-        $query = CarExperience::find()->select(['{{car_experience}}.*', '{{car_info}}.name',
-            '{{car_agency}}.account_name, {{car_agency}}.store_name, {{car_agency}}.position_name'])->with('carAgency', 'carInfo');
+        $query = CarExperience::find()->select(['MIN({{car_experience}}.car_id) AS car_id , MIN({{car_experience}}.agency_id) AS agency_id',
+            'COUNT({{car_experience}}.id) AS count',
+            'SUM({{car_experience}}.item_11) AS item_11',
+            'SUM({{car_experience}}.item_12) AS item_12',
+            'SUM({{car_experience}}.item_13) AS item_13',
+            'SUM({{car_experience}}.item_14) AS item_14',
+            'SUM({{car_experience}}.item_15) AS item_15',
+            'SUM({{car_experience}}.item_16) AS item_16',
+            'SUM({{car_experience}}.item_2) AS item_2',
+            '{{car_info}}.name', '{{car_agency}}.store_name'])->with('carAgency')
+            ->groupBy('{{car_experience}}.agency_id');
 
         // add conditions that should always apply here
 
@@ -68,7 +77,7 @@ class CarExperienceSearch extends CarExperience
             'sort' => [
                 'defaultOrder' => [
 //                    'sort' => SORT_ASC,
-                    'id' => SORT_DESC,
+                    'car_id' => SORT_ASC,
                 ]
             ]
         ]);
@@ -80,27 +89,15 @@ class CarExperienceSearch extends CarExperience
             // $query->where('0=1');
             return $dataProvider;
         }
+        if(!$this->car_name){//default filter
+            $this->car_id = 1;
+        }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'car_id' => $this->car_id,
-            'agency_id' => $this->agency_id,
-            'item_1' => $this->item_1,
-            'item_2' => $this->item_2,
-            'item_11' => $this->item_11,
-            'item_12' => $this->item_12,
-            'item_13' => $this->item_13,
-            'item_14' => $this->item_14,
-            'item_15' => $this->item_15,
-            'item_16' => $this->item_16,
-//            'created_at' => $this->created_at,
-//            'updated_at' => $this->updated_at,
-        ]);
         $query->joinWith(['carInfo', 'carAgency'])
-            ->andFilterWhere(['like', '{{car_info}}.name', $this->car_name])
-            ->andFilterWhere(['like', '{{car_agency}}.account_name', $this->account_name]);
+            ->andFilterWhere(['{{car_info}}.name'=>$this->car_name])
+            ->andFilterWhere(['car_id'=>$this->car_id]);
 
+//        var_dump($dataProvider);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query' => $query]));
         return $dataProvider;
     }

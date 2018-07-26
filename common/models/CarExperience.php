@@ -45,6 +45,7 @@ class CarExperience extends \yii\db\ActiveRecord
     {
         return [
             [['car_id', 'agency_id'], 'required'],
+            ['car_id', 'compare', 'compareValue' => 0, 'operator' => '>'],
             [['car_id', 'agency_id', 'item_1', 'item_2', 'item_11', 'item_12', 'item_13', 'item_14', 'item_15', 'item_16', 'created_at', 'updated_at'], 'integer'],
         ];
     }
@@ -66,7 +67,7 @@ class CarExperience extends \yii\db\ActiveRecord
             'item_14' => Yii::t('app', 'Car Item 14'),
             'item_15' => Yii::t('app', 'Car Item 15'),
             'item_16' => Yii::t('app', 'Car Item 16'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'created_at' => Yii::t('app', 'Experience Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }

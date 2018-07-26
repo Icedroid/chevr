@@ -27,33 +27,46 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
                     'columns' => [
-                        ['class' => CheckboxColumn::className()],
+//                        ['class' => CheckboxColumn::className()],
 
-                        'id',
+//                        'id',
 //                        'car_id',
-                        [
-                            'attribute' => 'car_name',
-                            'label' => yii::t('app', 'Car Name'),
-                            'value' => function ($model) {
-                                return $model->carInfo->name;
-                            }
-                        ],
-//                        'agency_id',
                         [
                             'attribute' => 'account_name',
                             'label' => yii::t('app', 'Account Name'),
                             'value' => function ($model) {
-                                return $model->carAgency->account_name;
+                                return null !== $model->carAgency ? $model->carAgency->account_name : '';
                             }
                         ],
                         [
-                            'attribute' => 'item_1',
-                            'format' => 'html',
+
+                            'label' => yii::t('app', 'Position Name'),
                             'value' => function ($model) {
-                             return $model->item_1 ? '&#10003;' : '&#10005';
-                            },
-                            'filter' => Constants::getFinishStatusItems(),
+                                return null !== $model->carAgency ? $model->carAgency->position_name : '';
+                            }
                         ],
+                        [
+                            'class' => DateColumn::className(),
+                            'attribute' => 'created_at',
+                            'format' => ['datetime', 'php:Y-m-d'],
+                        ],
+                        [
+                            'attribute' => 'car_name',
+                            'label' => yii::t('app', 'Car Name'),
+                            'value' => function ($model) {
+                                return null !== $model->carInfo ? $model->carInfo->name : '';
+                            }
+                        ],
+//                        'agency_id',
+
+//                        [
+//                            'attribute' => 'item_1',
+//                            'format' => 'html',
+//                            'value' => function ($model) {
+//                             return $model->item_1 ? '&#10003;' : '&#10005';
+//                            },
+//                            'filter' => Constants::getFinishStatusItems(),
+//                        ],
 
                         [
                             'attribute' => 'item_11',
@@ -111,16 +124,18 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                             },
                             'filter' => Constants::getFinishStatusItems(),
                         ],
-                        [
-                            'class' => DateColumn::className(),
-                            'attribute' => 'created_at',
-                        ],
                         // 'updated_at',
-
                         [
-                            'class' => ActionColumn::className(),
-                            'template' => '{view-layer} {delete}',
+                            'label' => yii::t('app', 'Experience Percentage'),
+                            'value' => function ($model) {
+                                return $model->getFinishPercentage();
+                            }
                         ],
+
+//                        [
+//                            'class' => ActionColumn::className(),
+//                            'template' => '{view-layer} {delete}',
+//                        ],
                     ],
                 ]); ?>
                 <?php Pjax::end(); ?>            </div>

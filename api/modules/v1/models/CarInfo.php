@@ -7,7 +7,7 @@ class CarInfo extends \common\models\CarInfo
     public function fields()
     {
         $fields = parent::fields();
-        unset($fields['h5image'], $fields['status'], $fields['created_at'], $fields['updated_at']);
+        unset($fields['status'], $fields['created_at'], $fields['updated_at']);
 //        $fields['image'] = function ($model) {
 //            if( empty($this->image) ) return '';
 //            if ( strpos($this->image, 'http') === 0 || strpos($this->image, 'https') === 0){

@@ -7,6 +7,8 @@ use common\helpers\Util;
 
 class CarInfo extends \common\models\CarInfo
 {
+    const VOICE_TYPE_SIMPLE = 0; //普通音箱
+    const VOICE_TYPE_BOSE = 1; //BOSE音箱
     /**
      * @inheritdoc
      */

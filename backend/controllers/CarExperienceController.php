@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\actions\ViewAction;
 use Yii;
 use backend\models\search\CarExperienceSearch;
+use backend\models\search\CarExperience2Search;
 use backend\models\CarExperience;
 use backend\actions\CreateAction;
 use backend\actions\UpdateAction;
@@ -30,6 +31,19 @@ class CarExperienceController extends \yii\web\Controller
                             'searchModel' => $searchModel,
                         ];
                     
+                }
+            ],
+            'index2' => [//车型试驾情况统计
+                'class' => IndexAction::className(),
+                'data' => function(){
+
+                    $searchModel = new CarExperience2Search();
+                    $dataProvider = $searchModel->search(yii::$app->getRequest()->getQueryParams());
+                    return [
+                        'dataProvider' => $dataProvider,
+                        'searchModel' => $searchModel,
+                    ];
+
                 }
             ],
             'create' => [
