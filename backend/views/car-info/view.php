@@ -25,6 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
             }
         ],
         [
+            'attribute' => 'h5image',
+            'format' => 'raw',
+            'value' => function($model){
+                return "<img style='max-width:200px;max-height:200px' src='" . $model->image . "' >";
+            }
+        ],
+        [
             'attribute' => 'voice_type',
             'value' => function($model){
                 return Constants::getYesNoItems($model->voice_type);

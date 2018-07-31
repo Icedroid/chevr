@@ -8,9 +8,8 @@
 
 namespace api\modules\v1\controllers;
 
-use Yii;
 use yii\web\Response;
-use api\modules\v1\models\CarInfo;
+use yii\data\ActiveDataProvider;
 
 class CarController extends \yii\rest\ActiveController
 {
@@ -56,8 +55,8 @@ class CarController extends \yii\rest\ActiveController
         unset($actions['delete'], $actions['create'], $actions['update']);
 
         // 使用"prepareDataProvider()"方法自定义数据provider
-//        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
-        $actions['index']['dataFilter'] = [
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+        /*$actions['index']['dataFilter'] = [
             'class' => 'yii\data\ActiveDataFilter',
             'searchModel' => function () {
                 return (new \yii\base\DynamicModel(['id' => null, 'name' => null, 'status' => null]))
@@ -68,7 +67,7 @@ class CarController extends \yii\rest\ActiveController
             },
             'filter'=>['status' => ($this->modelClass)::STATUS_ACTIVE],
 
-        ];
+        ];*/
 
         return $actions;
     }
@@ -82,7 +81,6 @@ class CarController extends \yii\rest\ActiveController
             'sort' => [
                 'defaultOrder' => [
                     'sort' => SORT_ASC,
-                    'created_at' => SORT_DESC,
                     'id' => SORT_DESC,
                 ]
             ]

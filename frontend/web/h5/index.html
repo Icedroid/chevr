@@ -1,34 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Document</title>
-	<link rel="stylesheet" href="css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>雪佛兰试驾报告</title>
+    <link rel="stylesheet" href="./css/index_v1.css">
 </head>
 <body>
-	<div class="cart-top">
-		<img src="img/cart.png" alt="">
-	</div>
-	<div class="times line">
-		<span>行驶时长:</span><i>20min</i>
-	</div>
-	<div class="speed line">
-		<span>最高时速:</span><i>55km/h</i>
-	</div>
-	<div class="steady line">
-		<span>车身稳定性:</span><strong><i>良好</i></strong>
-	</div>
-	<div class="cart-top">
-		<img src="img/keyword.png" alt="">
-	</div>
-	<div style="width: 100%;position: relative;">
-		<canvas id="myCanvas" style="position: absolute;top: 50%;left: 50%;margin-left: -150px;"></canvas>
-		<div class="foot">
-			<img src="img/arr.png" alt="">
-			<p>长按图片  保存试驾报告</p>
-		</div>
-	</div>
+<div id="container" style="background-color: #000000;">
+    <div class="cart-top">
+        <img src="" alt="" id="h5image">
+    </div>
+    <div class="times line">
+        <span>行驶时长:</span><i id="time">20mins</i>
+    </div>
+    <div class="speed line">
+        <span>最高时速:</span><i id="speed">55km/h</i>
+    </div>
+    <div class="steady line">
+        <span>车身稳定性:</span><strong><i id="stability">良好</i></strong>
+    </div>
+    <div class="cart-top">
+        <img src="./img/keyword.png" alt="">
+    </div>
+    <div style="width: 100%;position: relative;">
+        <canvas id="myCanvas"></canvas>
+    </div>
+    <div class="storeName" style="position: relative;">
+        <p id="store" style="background-color: #000000;color: #FFFFFF">宜兴汇通4S</p>
+    </div>
+</div>
+<div class="foot" style="width: 100%;position: relative;">
+    <img src="./img/arr.png" alt="">
+    <p>长按图片  保存试驾报告</p>
+</div>
 </body>
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/html2canvas.min.js"></script>
+<script type="text/javascript" src="./js/index_v1.js"></script>
 </html>

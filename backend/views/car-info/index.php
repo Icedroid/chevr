@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Info');
                             'attribute' => 'image',
                             'format' => 'raw',
                             'value' => function ($model, $key, $index, $column) {
-                                return Html::img($model->image ? $model->image : '');
+                                return Html::img($model->image ? $model->image : '', ['style'=>'width:170px; height:120px']);
                             },
                         ],
                         [
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Info');
                                 } else {
                                     $num = Constants::YesNo_Yes;
                                 }
-                                return Html::a(Constants::getYesNoItems($num), $model->h5image ? $model->h5image : 'javascript:void(0)', [
+                                return Html::a(Constants::getYesNoItems($num), 'javascript:void(0)', [
                                     'img' => $model->h5image ? $model->h5image : '',
                                     'class' => 'thumbImg',
                                     'target' => '_blank',
@@ -106,6 +106,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Info');
             var t;
             $('table tr td a.thumbImg').hover(showImg,function(){
                 clearTimeout(t);
+            }).click(function () {
+
             });
         });
         var container = $('#pjax');
