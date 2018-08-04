@@ -25,18 +25,26 @@ class CarInfo extends \common\models\CarInfo
     public function afterFind()
     {
         parent::afterFind();
-        if( empty($this->image) ) return ;
-        if ( strpos($this->image, 'http') === 0 || strpos($this->image, 'https') === 0){
-            return ;
+
+        $this->image = $this->getFileRightUrl($this->image);
+        $this->h5image = $this->getFileRightUrl($this->h5image);
+        $this->slogan = $this->getFileRightUrl($this->slogan);
+    }
+
+    public function getFileRightUrl($file)
+    {
+        if( empty($file) ) return '';
+        if ( strpos($file, 'http') === 0 || strpos($file, 'https') === 0){
+            return $file;
         }
 
-        if( strpos($this->image, '/') === 0 ){
-            $this->image = substr($this->image, 1);
+        if( strpos($file, '/') === 0 ){
+            $file = substr($file,1);
         }
         $hostUrl = Yii::$app->getRequest()->getHostInfo();
         if(isset(Yii::$app->params['staticCdn']) && !empty(Yii::$app->params['staticCdn'])){
             $hostUrl = Yii::$app->params['staticCdn'];
         }
-        $this->image = rtrim($hostUrl, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->image;
+        return rtrim($hostUrl, '/').'/'.$file;
     }
 }

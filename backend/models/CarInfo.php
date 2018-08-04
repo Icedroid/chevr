@@ -16,6 +16,7 @@ class CarInfo extends \common\models\CarInfo
     {
         Util::handleModelSingleFileUpload($this, 'image', $insert, '@car');
         Util::handleModelSingleFileUpload($this, 'h5image', $insert, '@car');
+        Util::handleModelSingleFileUpload($this, 'slogan', $insert, '@car');
 
         return parent::beforeSave($insert);
     }

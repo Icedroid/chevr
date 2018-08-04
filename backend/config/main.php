@@ -13,7 +13,16 @@ return [
     'language' => 'zh-CN',//默认语言
     'timeZone' => 'Asia/Shanghai',//默认时区
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+            // enter optional module parameters below - only if you need to
+            // use your own export download action or custom translation
+            // message source
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
+        ]
+    ],
     'components' => [
         'user' => [
             'identityClass' => backend\models\User::className(),
@@ -32,23 +41,23 @@ return [
                     'class' => yii\log\FileTarget::className(),//当触发levels配置的错误级别时，保存到日志文件
                     'levels' => ['error', 'warning'],
                 ],
-                [
-                    'class' => yii\log\EmailTarget::className(),//当触发levels配置的错误级别时，发送到message to配置的邮箱中（请改成自己的邮箱）
-                    'levels' => ['error', 'warning'],
-                    /*'categories' => [//默认匹配所有分类。启用此项后，仅匹配数组中的分类信息会触发邮件提醒（白名单）
-                        'yii\db\*',
-                        'yii\web\HttpException:*',
-                    ],*/
-                    'except' => [//以下配置，除了匹配数组中的分类信息都会触发邮件提醒（黑名单）
-                        'yii\web\HttpException:404',
-                        'yii\web\HttpException:403',
-                        'yii\debug\Module::checkAccess',
-                    ],
-                    'message' => [
-                        'to' => ['shenggxhz@qq.com'],//此处修改成自己接收错误的邮箱
-                        'subject' => '来自 Land 后台的新日志消息',
-                    ],
-                ],
+//                [
+//                    'class' => yii\log\EmailTarget::className(),//当触发levels配置的错误级别时，发送到message to配置的邮箱中（请改成自己的邮箱）
+//                    'levels' => ['error', 'warning'],
+//                    /*'categories' => [//默认匹配所有分类。启用此项后，仅匹配数组中的分类信息会触发邮件提醒（白名单）
+//                        'yii\db\*',
+//                        'yii\web\HttpException:*',
+//                    ],*/
+//                    'except' => [//以下配置，除了匹配数组中的分类信息都会触发邮件提醒（黑名单）
+//                        'yii\web\HttpException:404',
+//                        'yii\web\HttpException:403',
+//                        'yii\debug\Module::checkAccess',
+//                    ],
+//                    'message' => [
+//                        'to' => ['shenggxhz@qq.com'],//此处修改成自己接收错误的邮箱
+//                        'subject' => '来自 Land 后台的新日志消息',
+//                    ],
+//                ],
             ],
         ],
         'errorHandler' => [

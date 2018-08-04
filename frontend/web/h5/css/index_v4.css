@@ -1,0 +1,97 @@
+
+@font-face {
+    /* font-properties */
+    font-family: louis;
+    src: url('louisRegular.otf'),
+    url('louisRegular.ttf');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'louis', 'Handlee', "Microsoft Yahei", arial, sans-serif;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+input,textarea {
+    -webkit-user-select:auto; /*webkit浏览器*/
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+}
+
+body{
+    height: 100%;
+    background: #000;
+}
+.cart-top{
+
+}
+.cart-top img{
+    width: 100%;
+}
+.line{
+    height: 15px;
+    padding-left: 15px;
+    line-height: 15px;
+    background: #f1b51b;
+    font-size: 14px;
+    margin-bottom: 3px;
+    color: #5c060b;
+}
+.times{
+    width: 80%;
+}
+.times span:nth-child(1){
+    margin-right: 30%;
+    color: #000;
+    font-weight: bold;
+}
+.speed{
+    width: 60%;
+}
+.speed span:nth-child(1){
+    margin-right: 20%;
+    color: #000;
+    font-weight: bold;
+}
+.steady{
+    width: 70%;
+}
+.steady span:nth-child(1){
+    margin-right: 30%;
+    color: #000;
+    font-weight: bold;
+}
+#myCanvas{
+    position: absolute;
+    top: 50%;
+}
+.storeName{
+    position: absolute;
+    width: 100%;
+    top: 300px;
+    font-size: 13px;
+    text-indent:40px;
+    text-align: left;
+    z-index: 1;
+    background-color: #000000;
+}
+.foot{
+    position: absolute;
+    width: 100%;
+    top: 790px;
+    text-align: center;
+    color:#f1b51b;
+    z-index: 10;
+}
+.f-full{
+    position: absolute;
+    width: 100%;
+    top: 0;
+}

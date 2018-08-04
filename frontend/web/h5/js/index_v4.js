@@ -13,9 +13,9 @@ var mDelta = 75;
 var mRadius = mCenter - 60; //半径(减去的值用于给绘制的文本留空间)
 var mAngle = Math.PI * 2 / mCount; //角度
 var mCtx = null;
-var mColorPolygon = '#ebd909'; //多边形颜色
-var mColorLines = '#d09c17'; //顶点连线颜色
-var mColorText = '#f1b51b';
+var mColorPolygon = '#594209'; //多边形颜色
+var mColorLines = '#f1b41b'; //顶点连线颜色
+var mColorText = '#f1b41b';
 var mColorButton = '#5D050B';
 
 var timeOutEvent = 0;
@@ -49,14 +49,20 @@ function drawPolygon(ctx) {
   var r = mRadius / mCount; //单位半径
   //画6个圈
   for (var i = 0; i < mCount; i++) {
+    if(i<4) {
+      ctx.setLineDash([4,2]);
+    } else {
+      ctx.setLineDash([]);
+    }
     ctx.beginPath();
     var currR = r * (i + 1); //当前半径
     //画6条边
     for (var j = 0; j < mCount; j++) {
       var x = mCenter + currR * Math.cos(mAngle * j + 175)+mDelta;
-      var y = mCenter + currR * Math.sin(mAngle * j + 175);
-
-      ctx.lineTo(x, y);
+      var y = mCenter + currR * Math.sin(mAngle * j + 175)-mDelta;
+      if(i>0) {
+        ctx.lineTo(x, y);
+      }
     }
     ctx.closePath()
     ctx.stroke();
@@ -73,9 +79,9 @@ function drawLines(ctx) {
 
   for (var i = 0; i < mCount; i++) {
     var x = mCenter + mRadius * Math.cos(mAngle * i + 175)+mDelta;
-    var y = mCenter + mRadius * Math.sin(mAngle * i + 175);
+    var y = mCenter + mRadius * Math.sin(mAngle * i + 175)-mDelta;
 
-    ctx.moveTo(mCenter+mDelta, mCenter);
+    ctx.moveTo(mCenter+mDelta, mCenter-mDelta);
     ctx.lineTo(x, y);
   }
 
@@ -88,13 +94,13 @@ function drawLines(ctx) {
 function drawText(ctx) {
   ctx.save();
 
-  var fontSize = mCenter / 8;
+  var fontSize = mCenter / 10;
   ctx.font = fontSize + 'px Microsoft Yahei';
   ctx.fillStyle = mColorText;
 
   for (var i = 0; i < mCount; i++) {
     var x = mCenter + mRadius * Math.cos(mAngle * i + 175)+mDelta;
-    var y = mCenter + mRadius * Math.sin(mAngle * i + 175);
+    var y = mCenter + mRadius * Math.sin(mAngle * i + 175)-mDelta;
     if (i == 0) {
       x += -10;
       y += -30;
@@ -134,7 +140,7 @@ function drawTextButton(ctx) {
 
   for (var i = 0; i < mCount; i++) {
     var x = mCenter + mRadius * Math.cos(mAngle * i + 175)+mDelta;
-    var y = mCenter + mRadius * Math.sin(mAngle * i + 175);
+    var y = mCenter + mRadius * Math.sin(mAngle * i + 175)-mDelta;
     if (i == 0) {
       x += -10;
       y += -30;
@@ -176,7 +182,7 @@ function drawRegion(ctx) {
   ctx.beginPath();
   for (var i = 0; i < mCount; i++) {
     var x = mCenter + mRadius * Math.cos(mAngle * i + 175) * mData[i][1] / 100+mDelta;
-    var y = mCenter + mRadius * Math.sin(mAngle * i + 175) * mData[i][1] / 100;
+    var y = mCenter + mRadius * Math.sin(mAngle * i + 175) * mData[i][1] / 100-mDelta;
 
     ctx.lineTo(x, y);
   }
@@ -187,14 +193,24 @@ function drawRegion(ctx) {
   ctx.restore();
 }
 
+function showLayer(){
+  var bh=$(window).height();//获取屏幕高度
+  var bw=$(window).width();//获取屏幕宽度
+  $("#layer").css({
+    height:bh,
+    width:bw,
+    display:"block"
+  });
+  $("#pop").show();
+}
 
-function convert2canvas() {
+function convertToCanvas() {
 
   var cntElem = $('#container')[0];
 
   var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
   var width = document.body.clientWidth; //获取dom 宽度
-  var height = document.body.scrollHeight; //获取dom 高度
+  var height = document.body.scrollHeight-36; //获取dom 高度
   console.log(width,height);
   var canvas = document.createElement("canvas"); //创建一个canvas节点
   var scale = 2; //定义任意放大倍数 支持小数
@@ -208,26 +224,43 @@ function convert2canvas() {
     logging: true, //日志开关，便于查看html2canvas的内部执行流程
     width: width, //dom 原始宽度
     height: height,
+    //allowTaint:true,
     useCORS: true // 【重要】开启跨域配置
   };
 
   html2canvas(shareContent, opts).then(function (canvas) {
     var context = canvas.getContext('2d');
     // 【重要】关闭抗锯齿
-    // context.mozImageSmoothingEnabled = false;
-    // context.webkitImageSmoothingEnabled = false;
-    // context.msImageSmoothingEnabled = false;
-    // context.imageSmoothingEnabled = false;
+    context.mozImageSmoothingEnabled = false;
+    context.webkitImageSmoothingEnabled = false;
+    context.msImageSmoothingEnabled = false;
+    context.imageSmoothingEnabled = false;
 
-    // 【重要】默认转化的格式为png,也可设置为其他格式
-    //var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
-
-    //document.body.appendChild(img);
-
+    /*
+      * 传入对应想要保存的图片格式的mime类型
+      * 常见：image/png，image/gif,image/jpg,image/jpeg
+      */
+    //var type = 'image/jpeg';
+    //var imgData = canvas.toDataURL(type);
+    //var img = document.getElementById("save-img");
+    //img.src=imgData;
+    //var saveHref = document.getElementById("save-href");
+    //saveHref.href=imgData;
     // $(img).css({
     //   "width": canvas.width / 2 + "px",
     //   "height": canvas.height / 2 + "px",
-    // }).addClass('f-full');
+    // })
+    //console.log(imgData);
+    //var img = document.getElementById("save-img");
+    //$("#save-img").setAttribute('src',imgData);
+    // 【重要】默认转化的格式为png,也可设置为其他格式
+    var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
+    document.body.appendChild(img);
+    $("#container").remove();
+    $(img).css({
+      "width": canvas.width / 2 + "px",
+      "height": canvas.height / 2 + "px",
+    }).addClass('f-full');
 
     //var type = 'image/png';
     //var imgData = canvas.toDataURL(type);
@@ -238,26 +271,25 @@ function convert2canvas() {
     //   return 'image/' + r;
     // };
     // imgData = imgData.replace(_fixType(type),'image/octet-stream');
-    //   saveFile(imgData, '雪佛兰试驾报告.png', function() {
+    // saveFile(imgData, '雪佛兰试驾报告.jpg', function() {
     // });
-
-    var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
-    saveFile(img, '雪佛兰试驾报告.jpg', function() {
-    });
 
   });
 }
 
-function saveFile(data, filename, callback){
-  var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-  save_link.href = data;
-  save_link.download = filename;
-
-  var event = document.createEvent('MouseEvents');
-  event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-  save_link.dispatchEvent(event);
-  callback && callback();
-}
+// function saveFile(data, filename, callback){
+//   var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+//   save_link.href = data;
+//   save_link.download = filename;
+//
+//   var event = document.createEvent('Events');
+//   event.initEvent('touchstart', true, true);
+//   save_link.dispatchEvent(event);
+//   // var event = document.createEvent('MouseEvents');
+//   // event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+//   // save_link.dispatchEvent(event);
+//   callback && callback();
+// }
 //为jquery扩展了一个getUrlParam()方法
 (function ($) {
   $.getUrlParam = function (name) {
@@ -286,26 +318,26 @@ function saveFile(data, filename, callback){
 })();
 
 (function () {
-  $('#container').on({
-    touchstart:function(e){
-      //console.log($(this));
-      var index = $(this).index();
-      // 将当前元素的索引作为参数进行传递
-      timeOutEvent = setTimeout("convert2canvas()",500);
-      //e.preventDefault();
-    },
-    touchmove: function(){
-      clearTimeout(timeOutEvent);
-      timeOutEvent = 0;
-    },
-    touchend:function(){
-      clearTimeout(timeOutEvent);
-      if(timeOutEvent!=0){
-        //alert('你这是点击，不是长按');
-      }
-      return false;
-    }
-  });
+  // $('#container').on({
+  //   touchstart:function(e){
+  //     //console.log($(this));
+  //     var index = $(this).index();
+  //     // 将当前元素的索引作为参数进行传递
+  //     timeOutEvent = setTimeout("saveImg()",500);
+  //     //e.preventDefault();
+  //   },
+  //   touchmove: function(){
+  //     clearTimeout(timeOutEvent);
+  //     timeOutEvent = 0;
+  //   },
+  //   touchend:function(){
+  //     clearTimeout(timeOutEvent);
+  //     if(timeOutEvent!=0){
+  //       //alert('你这是点击，不是长按');
+  //     }
+  //     return false;
+  //   }
+  // });
 
   // var json = '{"uid":10000, "carid":1, "foursname":"4s店名称","time":20, "speed":50, "stability":1}';
   // console.log(encodeURIComponent(json));
@@ -315,7 +347,6 @@ function saveFile(data, filename, callback){
   } catch(e) {
     console.log(e);
   }
-  console.log(paramObj);
   var carid = 1;
   if(paramObj && paramObj.carid) {
     carid = paramObj.carid;
@@ -331,8 +362,10 @@ function saveFile(data, filename, callback){
   var getUrl = 'https://chevrolet-app.zedigital.com.cn/api/v1/cars/';
   jQuery.get(getUrl + carid, function (result) {
     if (result.msg == "OK" && result.data) {
-      console.log(result.data);
-      $('#h5image').attr("src", "https://chevrolet-static.zedigital.com.cn/" + result.data.h5image);
+      $('#h5image').attr("src", result.data.h5image);
+      $('#slogan').attr("src", result.data.slogan);
+      //转换成图片
+      setTimeout("convertToCanvas()","500");
     }
   });
 

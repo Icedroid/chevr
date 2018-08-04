@@ -31,7 +31,7 @@ class Bar extends Widget
         $buttons = '';
         $this->initDefaultButtons();
         $buttons .= $this->renderDataCellContent();
-        return "<div class='{$this->options['class']}'>{$buttons}</div>";
+        return "<div class='{$this->options['class']}' style='float:left'>{$buttons}</div>";
     }
 
     /**

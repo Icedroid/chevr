@@ -229,22 +229,20 @@ function convert2canvas() {
     //   "height": canvas.height / 2 + "px",
     // }).addClass('f-full');
 
-    //var type = 'image/png';
-    //var imgData = canvas.toDataURL(type);
-    // // 加工image data，替换mime type
-    // var _fixType = function(type) {
-    //   type = type.toLowerCase().replace(/jpg/i, 'jpeg');
-    //   var r = type.match(/png|jpeg|bmp|gif/)[0];
-    //   return 'image/' + r;
-    // };
-    // imgData = imgData.replace(_fixType(type),'image/octet-stream');
-    //   saveFile(imgData, '雪佛兰试驾报告.png', function() {
-    // });
+    var type = 'image/png';
 
-    var img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
-    saveFile(img, '雪佛兰试驾报告.jpg', function() {
+    var imgData = canvas.toDataURL(type);
+
+    var _fixType = function(type) {
+      type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+      var r = type.match(/png|jpeg|bmp|gif/)[0];
+      return 'image/' + r;
+    };
+
+    // 加工image data，替换mime type
+    imgData = imgData.replace(_fixType(type),'image/octet-stream');
+    saveFile(imgData, '雪弗兰试驾报告.png', function() {
     });
-
   });
 }
 

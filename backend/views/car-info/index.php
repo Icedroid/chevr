@@ -61,6 +61,22 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Info');
                             },
                         ],
                         [
+                            'attribute' => 'slogan',
+                            'format' => 'raw',
+                            'value' => function ($model, $key, $index, $column) {
+                                if ($model->slogan == '') {
+                                    $num = Constants::YesNo_No;
+                                } else {
+                                    $num = Constants::YesNo_Yes;
+                                }
+                                return Html::a(Constants::getYesNoItems($num), 'javascript:void(0)', [
+                                    'img' => $model->slogan ? $model->slogan : '',
+                                    'class' => 'thumbImg',
+                                    'target' => '_blank',
+                                ]);
+                            },
+                        ],
+                        [
                             'class' =>StatusColumn::className(),
                             'attribute' => 'voice_type',
                             'filter' => Constants::getYesNoItems(),

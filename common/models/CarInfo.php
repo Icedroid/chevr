@@ -44,7 +44,7 @@ class CarInfo extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['voice_type', 'sort', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'image', 'h5image'], 'string', 'max' => 255],
+            [['name', 'image', 'h5image', 'slogan'], 'string', 'max' => 255],
             [['voice_type', 'sort', 'status'], 'compare', 'compareValue' => 0, 'operator' => '>='],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif, webp'],
         ];
@@ -60,6 +60,7 @@ class CarInfo extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Car Name'),
             'image' => Yii::t('app', 'Car Image'),
             'h5image' => Yii::t('app', 'Car H5 Image'),
+            'slogan' => Yii::t('app', 'Slogan'),
             'voice_type' => Yii::t('app', 'Car Voice Type'),
             'sort' => Yii::t('app', 'Sort'),
             'status' => Yii::t('app', 'Status'),
@@ -71,19 +72,23 @@ class CarInfo extends \yii\db\ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        if ($this->image) {
+        if ($this->image || $this->h5image || $this->slogan) {
             /** @var TargetAbstract $cdn */
             $cdn = yii::$app->get('cdn');
             $this->image = $cdn->getCdnUrl($this->image);
+            $this->h5image = $cdn->getCdnUrl($this->h5image);
+            $this->slogan = $cdn->getCdnUrl($this->slogan);
         }
     }
 
     public function beforeSave($insert)
     {
-        if ($this->image) {
+        if ($this->image || $this->h5image || $this->slogan) {
             /** @var TargetAbstract $cdn */
             $cdn = yii::$app->get('cdn');
             $this->image = str_replace($cdn->host, '', $this->image);
+            $this->h5image = str_replace($cdn->host, '', $this->h5image);
+            $this->slogan = str_replace($cdn->host, '', $this->slogan);
         }
         return parent::beforeSave($insert);
     }
