@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_11',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_11 ? '&#10003;' : '&#10005';
+                            return $model->item_11 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_12',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_12 ? '&#10003;' : '&#10005';
+                            return $model->item_12 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_13',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_13 ? '&#10003;' : '&#10005';
+                            return $model->item_13 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_14',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_14 ? '&#10003;' : '&#10005';
+                            return $model->item_14 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_15',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_15 ? '&#10003;' : '&#10005';
+                            return $model->item_15 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_16',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_16 ? '&#10003;' : '&#10005';
+                            return $model->item_16 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Car Experiences');
                         'attribute' => 'item_2',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return $model->item_2 ? '&#10003;' : '&#10005';
+                            return $model->item_2 ? '&#10003;' : '&#10005;';
                         },
                         'filter' => Constants::getFinishStatusItems(),
                     ],
