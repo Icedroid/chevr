@@ -86,6 +86,7 @@ class DefaultController extends Controller
         if (NULL === $model) {
             $model = new CarAgency();
             $model->setAttributesByLoginForm($loginForm);
+            $model->access_token = $model->generateAccessToken();
             $model->login_count = 1;
             $model->last_login_time = time();
             if ($model->save()) {

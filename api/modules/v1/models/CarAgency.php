@@ -16,9 +16,9 @@ class CarAgency extends \common\models\CarAgency implements IdentityInterface
      */
     public function setAttributesByLoginForm($model)
     {
-        if(isset($model->access_token)){
-            $this->access_token = $model->access_token;
-        }
+//        if(isset($model->access_token)){
+//            $this->access_token = $model->access_token;
+//        }
         if(isset($model->accountCode)){
             $this->account_code = $model->accountCode;
         }

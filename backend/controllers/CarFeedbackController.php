@@ -25,6 +25,11 @@ class CarFeedbackController extends \yii\web\Controller
                     
                         $dataProvider = new ActiveDataProvider([
                             'query' => CarFeedback::find(),
+                            'sort' => [
+                                'defaultOrder' => [
+                                    'id' => SORT_DESC,
+                                ]
+                            ]
                         ]);
 
                         return [
